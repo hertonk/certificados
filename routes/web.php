@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\CheckController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,13 +18,28 @@ use App\Http\Controllers\EventController;
 |
 */
 
-Route::get('/participant/certificate', [CertificateController::class, 'participant']);
 
-Route::get('/monitor/certificate', [CertificateController::class, 'monitor']);
+Route::get('/participant/certificate/{participant}/{subevent}', [CertificateController::class, 'participant']);
 
-Route::get('/guest/certificate', [CertificateController::class, 'guest']);
+Route::get('/participant/certificate2/{id}', [CertificateController::class, 'participant2']);
 
-Route::get('/event/create', [EventController::class, 'create']);
+Route::get('/monitor/certificate/{id}/{monitor}', [CertificateController::class, 'monitor']);
 
-Route::post('/event/store', [EventController::class, 'store']);
+Route::get('/monitor/certificate2/{id}', [CertificateController::class, 'monitor2']);
 
+Route::get('/guest/certificate/{id}/{guest}', [CertificateController::class, 'guest']);
+
+Route::get('/guest/certificate2/{id}', [CertificateController::class, 'guest2']);
+
+//Route::get('/event/create', [EventController::class, 'create']);
+
+//Route::post('/event/store', [EventController::class, 'store']);
+
+
+Route::get('/', [SearchController::class, 'index']);
+
+Route::post('/pesquisa', [SearchController::class, 'pesquisa']);
+
+Route::get('/validar', [CheckController::class, 'validar']);
+
+Route::post('/resultado', [CheckController::class, 'resultado']);

@@ -45,7 +45,10 @@ use Carbon\Carbon;
             <p>Certificamos que {{ $name }}, portador(a) do CPF de Nº {{ $cpf }} foi monitor(a) da {{ $typeevent }} intitulado(a) <strong>"{{ $subevent }}"</strong> realizado(a) na <strong>{{ $event }}</strong> de {{ $dataevent }}.</p>
             <br />
             <br />
-            <p style="text-align: center;">{{ $city }}-{{ $state }}, {{ date('d') }} de Dezembro de 2022</p>
+            <p style="text-align: center;">{{ $city }}-{{ $state }}, {{ date('d') }} de {{ getMonthPTBR(date('M')) }} de 2023</p>
+            <br>
+            <br>
+            <small>Validação: {{ $check }} <br>{{ URL::to('validar') }}</small>
             </div>
        </div>
     </body>

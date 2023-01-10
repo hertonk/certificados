@@ -7,55 +7,211 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 use Carbon\Carbon;
 
+use App\Models\SubEvent;
+use App\Models\Guest;
+use App\Models\Event;
+use App\Models\Certificate;
+use App\Models\Monitor;
+use App\Models\Participant;
+
 class CertificateController extends Controller
 {
-    function participant(){
 
-        $data['name'] = "Herton";
-        $data['cpf'] = "067.811.094-80";
-        $data['typeevent'] = "oficina";
-        $data['subevent'] = "Make e cuidados com a pele";
-        $data['event'] = "Semana Nacional da Consciência Negra 2022";
-        $data['dataevent'] = "18 a 20 de Novembro de 2022";
-        $data['city'] = "Floresta";
-        $data['state'] = "PE";
+    function participant($participant, $subevent){
 
+        $subevent = SubEvent::find($subevent);
+        $participant = Participant::find($participant);
+        $event = Event::find($subevent->event_id);
+
+        $data['name'] = $participant->name;
+        $data['cpf'] = $participant->cpf;
+        $data['typeevent'] = $subevent->type;
+        $data['subevent'] = $subevent->name;
+        $data['event'] = $event->name;
+        $data['dataevent'] = $event->date;
+        $data['city'] = $event->city;
+        $data['state'] = $event->state;
+
+        $check = md5($participant->name.$participant->cpf.$subevent->type.$subevent->name.$event->name.$event->date.$event->city.$event->state.'participant');
+
+        $data['check'] = $check;
+
+        $search = Certificate::where('check', $check)->get();
+
+        if(count($search) > 0){
+
+
+
+        } else {
+
+            Certificate::create([
+                'name' => $participant->name,
+                'cpf' => $participant->cpf,
+                'typeevent' => $subevent->type,
+                'subevent' => $subevent->name,
+                'event' => $event->name,
+                'dataevent' => $event->date,
+                'city' => $event->city,
+                'state' => $event->state,
+                'role' => 'participant',
+                'check' => $check
+            ]);
+
+        }
 
         $pdf = Pdf::loadView('certificates.participant', $data)->setPaper('a4', 'landscape');
         return $pdf->stream();
 
     }
 
-    function monitor(){
+    function monitor($id, $monitor){
 
-        $data['name'] = "Herton";
-        $data['cpf'] = "067.811.094-80";
-        $data['typeevent'] = "oficina";
-        $data['subevent'] = "Make e cuidados com a pele";
-        $data['event'] = "Semana Nacional da Consciência Negra 2022";
-        $data['dataevent'] = "18 a 20 de Novembro de 2022";
-        $data['city'] = "Floresta";
-        $data['state'] = "PE";
+        $subevent = SubEvent::find($id);
+        $monitor = Monitor::find($monitor);
+        $event = Event::find($subevent->event_id);
 
+        $data['name'] = $monitor->name;
+        $data['cpf'] = $monitor->cpf;
+        $data['typeevent'] = $subevent->type;
+        $data['subevent'] = $subevent->name;
+        $data['event'] = $event->name;
+        $data['dataevent'] = $event->date;
+        $data['city'] = $event->city;
+        $data['state'] = $event->state;
+
+        $check = md5($monitor->name.$monitor->cpf.$subevent->type.$subevent->name.$event->name.$event->date.$event->city.$event->state.'monitor');
+
+        $data['check'] = $check;
+
+        $search = Certificate::where('check', $check)->get();
+
+        if(count($search) > 0){
+
+
+
+        } else {
+
+            Certificate::create([
+                'name' => $monitor->name,
+                'cpf' => $monitor->cpf,
+                'typeevent' => $subevent->type,
+                'subevent' => $subevent->name,
+                'event' => $event->name,
+                'dataevent' => $event->date,
+                'city' => $event->city,
+                'state' => $event->state,
+                'role' => 'monitor',
+                'check' => $check
+            ]);
+
+        }
 
         $pdf = Pdf::loadView('certificates.monitor', $data)->setPaper('a4', 'landscape');
         return $pdf->stream();
 
     }
 
-    function guest(){
+    function monitor2($id){
 
-        $data['name'] = "Herton";
-        $data['cpf'] = "067.811.094-80";
-        $data['typeevent'] = "oficina";
-        $data['subevent'] = "Make e cuidados com a pele";
-        $data['event'] = "Semana Nacional da Consciência Negra 2022";
-        $data['dataevent'] = "18 a 20 de Novembro de 2022";
-        $data['city'] = "Floresta";
-        $data['state'] = "PE";
+        $certificate = Certificate::find($id);
+
+        $data['name'] = $certificate->name;
+        $data['cpf'] = $certificate->cpf;
+        $data['typeevent'] = $certificate->type;
+        $data['subevent'] = $certificate->subevent;
+        $data['event'] = $certificate->event;
+        $data['dataevent'] = $certificate->dataevent;
+        $data['city'] = $certificate->city;
+        $data['state'] = $certificate->state;
+        $data['check'] = $certificate->check;
+
+        $pdf = Pdf::loadView('certificates.monitor', $data)->setPaper('a4', 'landscape');
+        return $pdf->stream();
+
+    }
+
+    function guest($id, $guest){
+
+        $subevent = SubEvent::find($id);
+        $guest = Guest::find($guest);
+        $event = Event::find($subevent->event_id);
+
+        $data['name'] = $guest->name;
+        $data['cpf'] = $guest->cpf;
+        $data['typeevent'] = $subevent->type;
+        $data['subevent'] = $subevent->name;
+        $data['event'] = $event->name;
+        $data['dataevent'] = $event->date;
+        $data['city'] = $event->city;
+        $data['state'] = $event->state;
+
+        $check = md5($guest->name.$guest->cpf.$subevent->type.$subevent->name.$event->name.$event->date.$event->city.$event->state.'guest');
+
+        $data['check'] = $check;
+
+        $search = Certificate::where('check', $check)->get();
+
+        if(count($search) > 0){
+
+
+
+        } else {
+
+            Certificate::create([
+                'name' => $guest->name,
+                'cpf' => $guest->cpf,
+                'typeevent' => $subevent->type,
+                'subevent' => $subevent->name,
+                'event' => $event->name,
+                'dataevent' => $event->date,
+                'city' => $event->city,
+                'state' => $event->state,
+                'role' => 'guest',
+                'check' => $check
+            ]);
+
+        }
 
 
         $pdf = Pdf::loadView('certificates.guest', $data)->setPaper('a4', 'landscape');
+        return $pdf->stream();
+
+    }
+
+    function guest2($id){
+
+        $certificate = Certificate::find($id);
+
+        $data['name'] = $certificate->name;
+        $data['cpf'] = $certificate->cpf;
+        $data['typeevent'] = $certificate->type;
+        $data['subevent'] = $certificate->subevent;
+        $data['event'] = $certificate->event;
+        $data['dataevent'] = $certificate->dataevent;
+        $data['city'] = $certificate->city;
+        $data['state'] = $certificate->state;
+        $data['check'] = $certificate->check;
+
+        $pdf = Pdf::loadView('certificates.guest', $data)->setPaper('a4', 'landscape');
+        return $pdf->stream();
+
+    }
+
+    function participant2($id){
+
+        $certificate = Certificate::find($id);
+
+        $data['name'] = $certificate->name;
+        $data['cpf'] = $certificate->cpf;
+        $data['typeevent'] = $certificate->type;
+        $data['subevent'] = $certificate->subevent;
+        $data['event'] = $certificate->event;
+        $data['dataevent'] = $certificate->dataevent;
+        $data['city'] = $certificate->city;
+        $data['state'] = $certificate->state;
+        $data['check'] = $certificate->check;
+
+        $pdf = Pdf::loadView('certificates.participant', $data)->setPaper('a4', 'landscape');
         return $pdf->stream();
 
     }

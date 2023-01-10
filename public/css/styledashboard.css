@@ -1,0 +1,140 @@
+:root {
+    --color-white: #fff;
+    --color-red: #e63636;
+    --color-dark1: #181818;
+    --color-dark2: #1e1e1e;
+    --color-purple1: #9333ff;
+    --color-purple2: indigo;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: black;
+    font-family: 'Roboto Slab', serif;
+    margin-bottom: 0;
+    /* padding-bottom: 50px; */
+}
+
+
+#header {
+    background-image: url('../images/faixa.png');
+    background-repeat: repeat-x;
+    height: 100px;
+}
+
+#header nav {
+    background-color: #3f3f46;
+}
+
+.card-dark {
+    background-color: var(--color-dark1) !important;
+    color: var(--color-white);
+}
+
+.linkButton {
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    outline: none;
+    border-radius: 5px;
+    background-color: #BD2D25;
+    color: var(--color-white);
+    cursor: pointer;
+    transition: 0.3s;
+    margin-left: 10px;
+    margin-right: 0px;
+    text-decoration: none;
+    font-weight: normal;
+    border: none;
+}
+
+.linkButton:hover {
+    background-color: #ED7716;
+}
+
+.profile-view {
+    position: relative;
+}
+.profile-view .profile-img-wrap {
+    height: 120px;
+    width: 120px;
+}
+.profile-view .profile-img {
+    width: 120px;
+    height: 120px;
+}
+.profile-view .profile-img .avatar {
+    font-size: 24px;
+    height: 120px;
+    line-height: 120px;
+    margin: 0;
+    width: 120px;
+}
+.profile-view .profile-basic {
+    margin-left: 140px;
+    padding-right: 50px;
+}
+.profile-basic {
+    margin-left: 140px;
+}
+.profile-basic .cal-icon {
+    width: 100%;
+}
+.profile-view .profile-basic {
+    margin-left: 140px;
+    padding-right: 50px;
+}
+.profile-view .profile-basic {
+    margin-left: 0;
+    padding-right: 0;
+}
+.profile-img-wrap {
+    position: relative;
+    margin: 0 auto;
+}
+.profile-info-left {
+    text-align: center;
+}
+.profile-basic {
+    margin-left: 0;
+    margin-top: 15px;
+}
+.profile-info-left {
+    border-right: none;
+    border-bottom: 2px dashed #3f3f46;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+.profile-info-left {
+    text-align: center;
+}
+
+.personal-info li .title {
+    color: #ccc;
+    float: left;
+    font-weight: 500;
+    margin-right: 30px;
+    width: 45%;
+}
+.personal-info li .text {
+    color: #b3b3b3;
+    display: block;
+    overflow: hidden;
+}
+.personal-info li {
+    margin-bottom: 10px;
+}
+.personal-info {
+    list-style: none;
+    margin-bottom: 0;
+    padding: 0;
+}
+.profile-img-wrap img {
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+}
